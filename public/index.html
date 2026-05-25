@@ -33,31 +33,34 @@
 
     <!-- Icons -->
     <div class="header-icons">
-  <a href="#" class="icon-btn"><span>🛒</span></a>
+      <a href="/html/cart.html" class="icon-btn cart-icon">
+        <span>🛒</span>
+        <span class="cart-badge">0</span>
+      </a>
 
-  <div class="user-account">
-    <div class="user-status hidden">
-      <span >Logged in</span>
-      <span class="dropdown-arrow">▾</span>
-    </div>
-    
-    
-    <a href="/login" class="icon-btn user-login"><span>👤</span></a>
+      <div class="user-account">
+        <div class="user-status hidden">
+          <span>Logged in</span>
+          <span class="dropdown-arrow">▾</span>
+        </div>
 
-    <div class="user-dropdown hidden">
-      <a href="#">Profile</a>
-      <a href="#">Orders</a>
-      <button class="logout-btn">Logout</button>
+
+        <a href="/login" class="icon-btn user-login"><span>👤</span></a>
+
+        <div class="user-dropdown hidden">
+          <a href="#">Profile</a>
+          <a href="#">Orders</a>
+          <button class="logout-btn">Logout</button>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
 
   </header>
 
 
   <div class="store__layout">
     <aside>
-        <p>hi</p>
+      <p>hi</p>
     </aside>
     <!-- Product Grid -->
     <main class="products">
@@ -65,8 +68,9 @@
         <!-- Repeat product-card blocks as needed -->
       </div>
     </main>
+
     <aside>
-        <p>hi</p>
+      <p>hi</p>
     </aside>
   </div>
   <footer class="footer">
@@ -89,6 +93,25 @@
       <p>Handcrafted by Msquare &bull; 2024</p>
     </div>
   </footer>
+  <div class="product-modal modal-hidden">
+    <div class="product-modal__content">
+
+      <span class="close-modal">&times;</span>
+
+      <img class="modal-image" />
+
+      <div class="modal-info">
+        <h2 class="modal-name"></h2>
+        <p class="modal-price"></p>
+      </div>
+
+      <div class="modal-actions">
+        <button class="add-cart-btn">Add to Cart</button>
+        <button class="view-more-btn">View More</button>
+      </div>
+
+    </div>
+  </div>
   <script src="../js/script.js"></script>
 </body>
 

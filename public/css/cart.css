@@ -1,0 +1,171 @@
+/* =========================
+   CART PAGE
+========================= */
+
+.cart-page {
+  padding: 30px 5%;
+  background: #f7f7f7;
+  min-height: 100vh;
+}
+
+/*Back Home Link*/
+.back-home-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+
+  margin-bottom: 20px;
+
+  text-decoration: none;
+
+  color: #ff7a18;
+
+  font-weight: bold;
+
+  transition: 0.2s ease;
+}
+
+.back-home-link:hover {
+  color: #e56700;
+  transform: translateX(-3px);
+}
+
+.cart-page h1 {
+  margin-bottom: 25px;
+  color: #222;
+}
+
+
+/* =========================
+   CART ITEMS CONTAINER
+========================= */
+
+.cart-items {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+
+/* =========================
+   CART ITEM
+========================= */
+
+.cart-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 20px;
+
+  background: white;
+
+  padding: 18px;
+
+  border-radius: 14px;
+
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+
+  transition: 0.2s ease;
+}
+
+.cart-item:hover {
+  transform: translateY(-2px);
+}
+
+
+/* =========================
+   IMAGE
+========================= */
+
+.cart-item__image {
+  width: 140px;
+  height: 140px;
+
+  object-fit: cover;
+
+  border-radius: 12px;
+
+  flex-shrink: 0;
+}
+
+
+/* =========================
+   DETAILS
+========================= */
+
+.cart-item__details {
+  flex: 1;
+
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.cart-item__details h3 {
+  font-size: 20px;
+  color: #222;
+}
+
+.cart-item__details p {
+  font-size: 16px;
+  color: #555;
+}
+
+
+/* =========================
+   PRICE
+========================= */
+
+.cart-price {
+  color: #ff7a18;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+
+/* =========================
+   QUANTITY
+========================= */
+
+.cart-quantity {
+  width: fit-content;
+
+  background: #fff3e8;
+
+  color: #ff7a18;
+
+  padding: 6px 12px;
+
+  border-radius: 20px;
+
+  font-weight: bold;
+}
+
+
+/* =========================
+   SUMMARY
+========================= */
+
+.cart-summary {
+  margin-top: 35px;
+
+  display: flex;
+  justify-content: flex-end;
+}
+
+.cart-summary h2 {
+  background: white;
+
+  padding: 15px 25px;
+
+  border-radius: 12px;
+
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+
+  color: #222;
+}
+
+.cart-total {
+  color: #ff7a18;
+}

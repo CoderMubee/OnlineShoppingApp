@@ -182,6 +182,71 @@ app.get("/products", (req, res) => {
         res.status(200).json(result);
     });
 });
+//--------------------------------USER INTERACTION ---------------------
+//add to cart
+app.post("/cart/add", (req, res) => {
+  const { user_id, product_id, quantity } = req.body;
+
+  const sql = `
+    INSERT INTO cart (user_id, product_id, quantity)
+    VALUES (?, ?, ?)
+    ON DUPLICATE KEY UPDATE
+    quantity = quantity + VALUES(quantity)
+  `;
+
+  db.query(sql, [user_id, product_id, quantity || 1], (err) => {
+    if (err) {
+      console.log(err);
+      return res.status(500).json({ message: "Database error" });
+    }
+
+    res.json({ message: "Added to cart" });
+  });
+});
+//get cart items
+app.get("/cart/:userId", (req, res) => {
+  const { userId } = req.params;
+
+  const sql = `
+    SELECT 
+      cart.id,
+      cart.quantity,
+      products.name,
+      products.price,
+      products.image_url
+    FROM cart
+    JOIN products ON cart.product_id = products.id
+    WHERE cart.user_id = ?
+  `;
+
+  db.query(sql, [userId], (err, result) => {
+    if (err) {
+      return res.status(500).json({ message: "DB error" });
+    }
+
+    res.json(result);
+  });
+});
+
+//get user cart quantity
+app.get("/cart/count/:userId", (req, res) => {
+  const { userId } = req.params;
+
+  const sql = `
+    SELECT SUM(quantity) AS total
+    FROM cart
+    WHERE user_id = ?
+  `;
+
+  db.query(sql, [userId], (err, result) => {
+    if (err) {
+      return res.status(500).json({ message: "DB error" });
+    }
+
+    res.json({ total: result[0].total || 0 });
+  });
+});
+
 // LISTEN (OUTSIDE ROUTES)
 app.listen(port, () => {
     console.log('Connected on port:3000');
