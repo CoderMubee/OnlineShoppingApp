@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Login - UmmuMujahid Store</title>
+    <link rel="stylesheet" href="../css/login&register.css">
+</head>
+
+<body class="login__body">
+    <div class="login__container">
+        <nav class="login__nav account__nav">
+            <a href="../index.html" class="login_nav__anchor account__nav__anchor"><img src="../icons/home-30.png"
+                    alt="home icon" class="login_nav__img account_nav__img"></a>
+        </nav>
+
+        <h2 class="login__title">Login</h2>
+        <p class="login__p--message"></p>
+        <form class="login__form">
+            <input type="text" class=" login__input login__input--username" placeholder="Username" required>
+            <input type="password" class=" login__input login__input--password" placeholder="Password" required>
+            <button type="submit" class="login__button login__button--submit">Login</button>
+        </form>
+        <div class="login__links">
+            <p><a href="#">Forgot Password?</a></p>
+            <p>Don't have an account? <a href="/register">Register</a></p>
+        </div>
+    </div>
+    <script type="module" src="../js/login.js"></script>
+</body>
+
+</html>

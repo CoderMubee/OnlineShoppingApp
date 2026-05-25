@@ -1,0 +1,252 @@
+body {
+    height: 95vh;
+}
+
+.login__body {
+    margin: 0;
+    font-family: 'Verdana', sans-serif;
+    background: linear-gradient(to right, #fce4ec, #e0f7fa);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(-45deg, #fce4ec, #e0f7fa, #fdf2f4, #e0f7fa);
+    background-size: 400% 400%;
+    animation: gradientShift 12s ease infinite;
+
+}
+
+.login__container {
+    animation: slideUp 1s ease;
+
+    border-top: 4px solid rgb(231, 122, 140);
+    position: relative;
+    background: #fff;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    width: 320px;
+    text-align: center;
+}
+
+
+.login__title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: rgb(231, 122, 140);
+    margin-bottom: 3rem;
+    margin-top: 0;
+}
+
+.login__input:focus {
+    outline: none;
+    border-color: rgb(231, 122, 140);
+    box-shadow: 0 0 8px rgba(231, 122, 140, 0.4);
+    transition: 0.3s ease;
+}
+
+.login__input {
+    width: 100%;
+    padding: 0.6rem;
+    margin: 0.5rem 0;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 0.95rem;
+}
+
+.login__button {
+    width: 100%;
+    padding: 0.7rem;
+    background: rgb(231, 122, 140);
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-top: 1rem;
+    transition: background 0.3s ease;
+}
+
+.login__button:hover {
+    background: #d94c6f;
+    transform: translateY(-2px) scale(1.02);
+
+}
+
+.login__button:active {
+    transform: scale(0.98);
+}
+
+
+.login__links {
+    margin-top: 1rem;
+    font-size: 0.85rem;
+}
+
+
+.login__links a {
+    color: rgb(231, 122, 140);
+    text-decoration: none;
+    font-weight: bold;
+}
+.account__nav {
+    position: absolute;
+    top: 2rem;
+}
+
+.account__links a:hover {
+    text-decoration: underline;
+}
+/* General transition for smoothness */
+.account_nav__img {
+  transition: transform 0.4s ease, opacity 0.4s ease, border 0.3s ease;
+  opacity: 0;                /* start hidden */
+  transform: scale(0.8);     /* slightly smaller */
+  animation: iconFadeIn 1s ease forwards; /* entrance animation */
+}
+
+/* Hover effect */
+.account_nav__img:hover {
+  transform: scale(1.2) rotate(-5deg); /* playful tilt */
+  opacity: 1;
+}
+
+/* Active (click) effect */
+.account_nav__img:active {
+  transform: scale(0.85); /* subtle press-down */
+}
+
+/* Entrance animation */
+@keyframes iconFadeIn {
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+
+/* Register*/
+.register__body {
+    margin: 0;
+    font-family: 'Verdana', sans-serif;
+    background: linear-gradient(to right, #fce4ec, #e0f7fa);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 95%;
+    background: linear-gradient(-45deg, #fce4ec, #e0f7fa, #fdf2f4, #e0f7fa);
+    background-size: 400% 400%;
+    animation: gradientShift 12s ease infinite;
+
+}
+@keyframes gradientShift {
+  0% {background-position: 0% 50%;}
+  50% {background-position: 100% 50%;}
+  100% {background-position: 0% 50%;}
+}
+
+
+.register__container {
+
+    border-top: 4px solid rgb(231, 122, 140);
+    background: #fff;
+    padding: 0 2rem;
+    border-radius: 12px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+    width: 400px;
+    animation: fadeIn 1.5s ease;
+    animation: slideUp 1s ease;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.register__message{
+    color: greenyellow;
+    font-size: 2rem;
+}
+
+.register__title {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: rgb(231, 122, 140);
+    font-family: 'Pacifico', cursive;
+    text-align: center;
+}
+
+.register__input:focus,
+.register__select:focus {
+    outline: none;
+    border-color: rgb(231, 122, 140);
+    box-shadow: 0 0 8px rgba(231, 122, 140, 0.4);
+    transition: 0.3s ease;
+}
+
+.register__input,
+.register__select {
+    width: 100%;
+    padding: 0.6rem;
+    margin: 0.5rem 0;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 0.95rem;
+}
+
+.register__button {
+    width: 100%;
+    padding: 0.8rem;
+    background: rgb(231, 122, 140);
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-top: 1rem;
+    transition: background 0.3s ease;
+}
+
+.register__button:hover {
+    background: #d94c6f;
+    transform: translateY(-2px) scale(1.02);
+}
+
+.register__button:active {
+    transform: scale(0.98);
+}
+
+.register__links {
+    margin-top: 1rem;
+    font-size: 0.85rem;
+    text-align: center;
+}
+
+.register__links a {
+    color: rgb(231, 122, 140);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.register__links a:hover {
+    text-decoration: underline;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

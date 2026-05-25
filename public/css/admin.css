@@ -1,0 +1,248 @@
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+  background:#f5f5f5;
+}
+
+.admin-layout{
+  display:grid;
+  grid-template-columns:250px 1fr;
+  min-height:100vh;
+}
+
+/* SIDEBAR */
+.sidebar{
+  background:#1f2937;
+  color:white;
+  padding:2rem 1rem;
+}
+
+.sidebar__logo{
+  margin-bottom:2rem;
+  color:#ff6600;
+}
+
+.sidebar__nav{
+  display:flex;
+  flex-direction:column;
+  gap:1rem;
+}
+
+.sidebar__nav a{
+  text-decoration:none;
+  color:white;
+  padding:0.8rem;
+  border-radius:6px;
+  transition:0.3s;
+}
+
+.sidebar__nav a:hover{
+  background:#374151;
+}
+
+/* MAIN */
+.admin-main{
+  padding:2rem;
+}
+
+.admin-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:2rem;
+}
+
+.logout-btn{
+  border:none;
+  background:#dc3545;
+  color:white;
+  padding:0.7rem 1rem;
+  border-radius:6px;
+  cursor:pointer;
+}
+
+/* CARDS */
+.dashboard-cards{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:1rem;
+  margin-bottom:2rem;
+}
+
+.card{
+  background:white;
+}
+/* PRODUCT UPLOAD SECTION */
+.product-upload {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+}
+
+.product-upload h2 {
+  margin-bottom: 1rem;
+  font-size: 1.3rem;
+  color: #333;
+}
+
+/* FORM */
+.product-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+/* full width fields */
+.product-description,
+.product-form button {
+  grid-column: span 2;
+}
+
+/* INPUT FIELDS */
+.product-form input,
+.product-form textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  outline: none;
+  transition: 0.3s ease;
+  background: #fafafa;
+}
+
+/* focus effect */
+.product-form input:focus,
+.product-form textarea:focus {
+  border-color: #ff6600;
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(255,102,0,0.15);
+}
+
+/* TEXTAREA */
+.product-form textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+/* BUTTON */
+.product-form button {
+  width: 30%;  
+  padding: 12px;
+  background: linear-gradient(135deg, #ff6600, #ff8a3d);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+/* hover */
+.product-form button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(255,102,0,0.25);
+}
+
+/* active */
+.product-form button:active {
+  transform: scale(0.98);
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .product-form {
+    grid-template-columns: 1fr;
+  }
+
+  .product-description,
+  .product-form button {
+    grid-column: span 1;
+  }
+}
+
+/* TABLE SECTION */
+.products-table-section {
+  margin-top: 2rem;
+  padding: 1rem;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+}
+
+/* Title */
+.products-table-section h2 {
+  margin-bottom: 1rem;
+  font-size: 1.3rem;
+  color: #333;
+}
+
+/* TABLE */
+.products-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+/* HEADER */
+.products-table thead {
+  background: linear-gradient(135deg, #ff6600, #ff8a3d);
+  color: white;
+}
+
+.products-table th {
+  text-align: left;
+  padding: 12px 15px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+/* ROWS */
+.products-table tbody tr {
+  border-bottom: 1px solid #eee;
+  transition: 0.3s ease;
+}
+
+/* hover effect */
+.products-table tbody tr:hover {
+  background: #fff4ee;
+  transform: scale(1.01);
+}
+
+/* CELLS */
+.products-table td {
+  padding: 12px 15px;
+  color: #444;
+}
+
+/* STRIPED EFFECT (optional but nice) */
+.products-table tbody tr:nth-child(even) {
+  background: #fafafa;
+}
+
+/* STOCK BADGE (optional upgrade) */
+.stock-low {
+  color: #fff;
+  background: #dc3545;
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+}
+
+.stock-ok {
+  color: #fff;
+  background: #28a745;
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+}

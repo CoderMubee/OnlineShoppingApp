@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard</title>
+  <link rel="stylesheet" href="../css/admin.css">
+</head>
+<body>
+
+  <div class="admin-layout">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <h2 class="sidebar__logo">ShopEase</h2>
+
+      <nav class="sidebar__nav">
+        <a href="#">Dashboard</a>
+        <a href="#">Products</a>
+        <a href="#">Orders</a>
+        <a href="#">Customers</a>
+        <a href="#">Analytics</a>
+      </nav>
+    </aside>
+
+
+    <!-- MAIN CONTENT -->
+    <main class="admin-main">
+
+      <header class="admin-header">
+        <h1>Admin Dashboard</h1>
+        <button class="logout-btn">Logout</button>
+      </header>
+
+
+      <!-- CARDS -->
+      <section class="dashboard-cards">
+
+        <div class="card">
+          <h3>Total Products</h3>
+          <p id="total-products">0</p>
+        </div>
+
+        <div class="card">
+          <h3>Total Orders</h3>
+          <p>0</p>
+        </div>
+
+        <div class="card">
+          <h3>Total Customers</h3>
+          <p>0</p>
+        </div>
+
+      </section>
+
+
+      <!-- PRODUCT FORM -->
+      <section class="product-upload">
+
+        <h2>Add Product</h2>
+
+        <form class="product-form">
+
+          <input type="text" class="product-name" placeholder="Product Name" required>
+
+          <input type="number" class="product-price" placeholder="Price" required>
+
+          <input type="text" class="product-image" placeholder="Image URL" required>
+
+          <input type="text" class="product-category" placeholder="Category">
+
+          <textarea class="product-description" placeholder="Description"></textarea>
+
+          <input type="number" class="product-stock" placeholder="Stock Quantity">
+
+          <button type="submit">Upload Product</button>
+
+        </form>
+
+      </section>
+
+
+      <!-- PRODUCTS TABLE -->
+     <section class="products-table-section">
+
+  <h2>Products</h2>
+
+  <table class="products-table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Category</th>
+        <th>Stock</th>
+      </tr>
+    </thead>
+
+    <tbody class="table-body"></tbody>
+  </table>
+
+</section>
+<script src="../js/admin.js"></script>
+    </main>
+  </div>
+</body>
+</html>

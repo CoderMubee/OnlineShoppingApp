@@ -1,0 +1,73 @@
+[
+  {
+    "category":"Electronics",
+    "name": "Home Theatre",
+    "price": 2000,
+    "image_url": "images/cat1.jpeg",
+    "size":"2kg, 30cm by 20cm by 10cm",
+    "color" :"red",
+    "video_url":"/videos/demo.mp4"
+  },
+  {
+    "category":"Electronics",
+    "name": "plasma TV",
+    "price": 4150,
+    "image_url": "images/cat2.jpeg",
+    "color" :"orange"
+  },
+  {
+    "category":"Clothings",
+    "name": "Men's Gym T-Shirt",
+    "price": 3500,
+    "image_url": "images/cat3.jpeg",
+    "color" :"green",
+    "video_url":"demo.mp4"
+  },
+  {
+
+    "name": "Wireless Headphones",
+    "category":"Electronics",
+    "price": 12000,
+    "image_url": "images/cat4.jpeg",
+    "color" :"indigo"
+  },
+  {
+    "category":"Gadgets",
+    "name": "Smart Fitness Watch",
+    "price": 18500,
+    "image_url": "images/cat5.jpeg",
+    "color" :"violet"
+  },
+  { 
+    "category":"Gadgets",
+    "name": "Bluetooth Speaker",
+    "price": 9500,
+    "image_url": "images/cat6.jpeg",
+    "color" :"blue"
+  },
+  {
+    "name": "Protein Shaker Bottle",
+    "price": 2500,
+    "image_url": "images/cat7.jpeg",
+    "color" :"yellow"
+  },
+  {
+    "name": "Running Sneakers",
+    "price": 22000,
+    "image_url": "images/cat8.jpeg",
+    "color" :"pink"
+  },
+  {
+    "name": "Gym Backpack",
+    "price": 8700,
+    "image_url": "images/cat9.jpeg",
+    "color" :"black"
+  },
+  {
+    "name": "Adjustable Dumbbells",
+    "price": 45000,
+    "image_url": "images/cat10.jpeg",
+    "color" :"orange",
+    "video_url":"demo.mp4"
+  }
+]
