@@ -247,6 +247,121 @@ app.get("/cart/count/:userId", (req, res) => {
   });
 });
 
+
+//checkout cart
+app.post("/checkout", (req, res) => {
+
+  const { user_id } = req.body;
+
+  // GET USER CART
+  const cartSql = `
+    SELECT 
+      cart.product_id,
+      cart.quantity,
+      products.price
+    FROM cart
+    JOIN products 
+      ON cart.product_id = products.id
+    WHERE cart.user_id = ?
+  `;
+
+  db.query(cartSql, [user_id], (err, cartItems) => {
+
+    if (err) {
+      console.log(err);
+
+      return res.status(500).json({
+        message: "Database error"
+      });
+    }
+
+    // EMPTY CART CHECK
+    if (cartItems.length === 0) {
+      return res.status(400).json({
+        message: "Cart is empty"
+      });
+    }
+
+    // CALCULATE TOTAL
+    let total = 0;
+
+    cartItems.forEach(item => {
+      total += item.price * item.quantity;
+    });
+
+    // CREATE ORDER
+    const orderSql = `
+      INSERT INTO orders
+      (user_id, total_amount)
+      VALUES (?, ?)
+    `;
+
+    db.query(orderSql, [user_id, total], (err2, orderResult) => {
+
+      if (err2) {
+        console.log(err2);
+
+        return res.status(500).json({
+          message: "Order creation failed"
+        });
+      }
+
+      const orderId = orderResult.insertId;
+
+      // PREPARE ORDER ITEMS
+      const values = cartItems.map(item => [
+        orderId,
+        item.product_id,
+        item.quantity,
+        item.price
+      ]);
+
+      // INSERT ORDER ITEMS
+      const itemsSql = `
+        INSERT INTO order_items
+        (order_id, product_id, quantity, price)
+        VALUES ?
+      `;
+
+      db.query(itemsSql, [values], (err3) => {
+
+        if (err3) {
+          console.log(err3);
+
+          return res.status(500).json({
+            message: "Failed to save order items"
+          });
+        }
+
+        // CLEAR CART
+        const clearSql = `
+          DELETE FROM cart
+          WHERE user_id = ?
+        `;
+
+        db.query(clearSql, [user_id], (err4) => {
+
+          if (err4) {
+            console.log(err4);
+
+            return res.status(500).json({
+              message: "Failed to clear cart"
+            });
+          }
+
+          return res.status(200).json({
+            message: "Checkout successful"
+          });
+
+        });
+
+      });
+
+    });
+
+  });
+
+});
 // LISTEN (OUTSIDE ROUTES)
 app.listen(port, () => {
     console.log('Connected on port:3000');

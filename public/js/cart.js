@@ -1,3 +1,4 @@
+//get user cart items
 const cartContainer = document.querySelector(".cart-items");
 const totalElement = document.querySelector(".cart-total");
 
@@ -63,3 +64,46 @@ function renderCart(items) {
 
 
 loadCart();
+
+//Checkout
+document.querySelector(".checkout-btn")
+.addEventListener("click", checkout);
+
+
+async function checkout() {
+
+  const user = JSON.parse(
+    localStorage.getItem("ummuMujahid_user")
+  );
+
+  try {
+
+    const res = await fetch("/checkout", {
+      method: "POST",
+
+      headers: {
+        "Content-Type": "application/json"
+      },
+
+      body: JSON.stringify({
+        user_id: user.id
+      })
+    });
+
+    const data = await res.json();
+
+    if (!res.ok) {
+      throw new Error(data.message);
+    }
+
+    alert(data.message);
+
+    location.reload();
+
+  } catch (err) {
+
+    console.log(err);
+
+    alert(err.message);
+  }
+}
