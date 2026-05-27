@@ -78,7 +78,7 @@ async function checkout() {
 
   try {
 
-    const res = await fetch("/checkout", {
+    const res = await fetch("/orders/checkout", {
       method: "POST",
 
       headers: {
