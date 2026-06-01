@@ -67,17 +67,40 @@ function displayProducts(products) {
 // OPEN MODAL
 
 function openProductModal(product) {
+  const user = getUser();
+  const addToCart_Btn = modal.querySelector(".add-cart-btn");
+  const addMore_Btn = modal.querySelector(".view-more-btn");
   modal.querySelector(".modal-image").src = product.image_url;
   modal.querySelector(".modal-name").textContent = product.name;
   modal.querySelector(".modal-price").textContent =
     "₦" + Number(product.price).toLocaleString();
-
+  addToCart_Btn.textContent = 'add to cart';
   modal.classList.remove("modal-hidden");
 
-  modal.querySelector(".add-cart-btn").onclick = () => {
-    
-    addToCart(product);
-  };
+  addToCart_Btn.onclick = async () => {
+
+  if (!user) {
+    window.location.href = "/html/login.html";
+    return;
+  }
+
+  await addToCart(product);
+
+  addToCart_Btn.textContent = "Item Added ✓";
+
+  addToCart_Btn.disabled = true;
+
+  setTimeout(() => {
+    modal.classList.add("modal-hidden");
+
+    addToCart_Btn.textContent = "Add To Cart";
+
+    addToCart_Btn.disabled = false;
+
+  }, 1500);
+
+};
+
 
   modal.querySelector(".view-more-btn").onclick = () => {
     window.location.href = `/product/${product.id}`;
@@ -85,7 +108,7 @@ function openProductModal(product) {
 }
 // CLOSE MODAL
 document.querySelector(".close-modal").addEventListener("click", () => {
-document.querySelector(".product-modal").classList.add("modal-hidden");
+  document.querySelector(".product-modal").classList.add("modal-hidden");
 });
 
 modal.addEventListener("click", (e) => {
@@ -127,7 +150,6 @@ function toggleDropdown() {
 async function addToCart(product) {
   const user = getUser();
   if (!user) {
-    alert("Please login first");
     window.location.href = "/html/login.html";
     return;
   }
@@ -148,11 +170,11 @@ async function addToCart(product) {
 
   if (!res.ok) {
     alert(data.message);
-    
+
     return;
   }
   updateCartCount();
-  alert("Added to cart");
+
 }
 
 //get user cart quantity

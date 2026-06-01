@@ -106,4 +106,5 @@ module.exports = {
   checkout,
   getOrders,
   getOrderDetails
+  
 };
