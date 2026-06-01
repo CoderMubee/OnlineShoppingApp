@@ -24,6 +24,7 @@ async function loadProducts() {
 
 
 // ===================== RENDER PRODUCTS =====================
+
 function renderProducts(products) {
 
   tableBody.innerHTML = "";
@@ -39,12 +40,77 @@ function renderProducts(products) {
       <td>₦${Number(product.price).toLocaleString()}</td>
       <td>${product.category || "-"}</td>
       <td>${product.stock ?? 0}</td>
+
+      <td>
+        <button
+          class="edit-btn"
+          data-id="${product.id}"
+        >
+          Edit
+        </button>
+
+        <button
+          class="delete-btn"
+          data-id="${product.id}"
+        >
+          Delete
+        </button>
+      </td>
     `;
 
     tableBody.appendChild(row);
   });
-}
 
+}
+// delete operation
+tableBody.addEventListener("click", async (e) => {
+
+  if (!e.target.classList.contains("delete-btn")) return;
+
+  const productId = e.target.dataset.id;
+
+  const confirmed = confirm(
+    "Delete this product?"
+  );
+
+  if (!confirmed) return;
+
+  try {
+
+    const res = await fetch(
+      `/admin/products/${productId}`,
+      {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }
+    );
+
+    const data = await res.json();
+
+    alert(data.message);
+
+    loadProducts();
+
+  } catch (err) {
+
+    console.log(err);
+
+  }
+
+});
+//edit operation
+tableBody.addEventListener("click", (e) => {
+
+  if (!e.target.classList.contains("edit-btn")) return;
+
+  const productId = e.target.dataset.id;
+
+  window.location.href =
+    `/html/edit-product.html?id=${productId}`;
+
+});
 
 // ===================== ADD PRODUCT =====================
 productForm.addEventListener("submit", async (e) => {
