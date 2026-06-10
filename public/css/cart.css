@@ -170,6 +170,64 @@
   color: #ff7a18;
 }
 
+/* ===== PLUS & MINUS BUTTONS ===== */
+.plus,
+.minus {
+  width: 30px;
+  height: 30px;
+  border: none;
+  border-radius: 6px;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  background: #f2f2f2;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.2s ease;
+}
+
+.plus:hover,
+.minus:hover {
+  background: #e0e0e0;
+}
+
+.plus:active,
+.minus:active {
+  transform: scale(0.95);
+}
+
+/* optional color hint */
+.plus {
+  color: green;
+}
+
+.minus {
+  color: #b30000;
+}
+
+/* ===== REMOVE BUTTON (SMALL + CLEAN) ===== */
+.remove-btn {
+  margin-top: 8px;
+  padding: 5px 10px;
+  font-size: 12px;
+  border: none;
+  border-radius: 5px;
+  background: #ff4d4d;
+  color: white;
+  cursor: pointer;
+  transition: 0.2s ease;
+  display: inline-block;
+  width: max-content;
+}
+
+.remove-btn:hover {
+  background: #e60000;
+}
+
+.remove-btn:active {
+  transform: scale(0.95);
+}
 /* =========================
    Checkout Order
 ========================= */
