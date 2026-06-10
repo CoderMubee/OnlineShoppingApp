@@ -5,6 +5,7 @@ function getCartByUser(userId, callback) {
   const sql = `
     SELECT 
       cart.id,
+      cart.product_id,
       cart.quantity,
       products.name,
       products.price,
@@ -20,6 +21,7 @@ function getCartByUser(userId, callback) {
 
 // ADD TO CART
 function addToCart(user_id, product_id, quantity, callback) {
+
   const sql = `
     INSERT INTO cart (user_id, product_id, quantity)
     VALUES (?, ?, ?)
@@ -27,12 +29,42 @@ function addToCart(user_id, product_id, quantity, callback) {
     quantity = quantity + VALUES(quantity)
   `;
 
-  db.query(sql, [user_id, product_id, quantity || 1], callback);
+  db.query(
+    sql,
+    [user_id, product_id, Number(quantity) || 1],
+    callback
+  );
+}
+
+
+// UPDATE CART
+function updateCart(user_id, product_id, quantity, callback) {
+
+  const sql = `
+    UPDATE cart
+    SET quantity = ?
+    WHERE user_id = ? AND product_id = ?
+  `;
+
+  db.query(sql, [quantity, user_id, product_id], callback);
+}
+
+
+// REMOVE ITEM
+function removeItem(user_id, product_id, callback) {
+
+  const sql = `
+    DELETE FROM cart
+    WHERE user_id = ? AND product_id = ?
+  `;
+
+  db.query(sql, [user_id, product_id], callback);
 }
 
 
 // GET CART COUNT
 function getCartCount(userId, callback) {
+
   const sql = `
     SELECT SUM(quantity) AS total
     FROM cart
@@ -45,5 +77,7 @@ function getCartCount(userId, callback) {
 module.exports = {
   getCartByUser,
   addToCart,
-  getCartCount
+  getCartCount,
+  updateCart,
+  removeItem
 };

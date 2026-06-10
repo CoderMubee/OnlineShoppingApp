@@ -11,6 +11,12 @@ router.post("/add", cartController.addToCart);
 // GET CART ITEMS
 router.get("/:userId", cartController.getCart);
 
+// update quantity
+router.put("/update", cartController.updateCart);
+
+// remove item
+router.delete("/remove", cartController.removeItem);
+
 
 // CART COUNT
 router.get("/count/:userId", cartController.getCartCount);

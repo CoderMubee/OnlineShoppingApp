@@ -86,18 +86,20 @@ function openProductModal(product) {
 
   await addToCart(product);
 
-  addToCart_Btn.textContent = "Item Added ✓";
+ showToast(
+  "Product added to cart",
+  "success"
+);
 
-  addToCart_Btn.disabled = true;
+addToCart_Btn.disabled = true;
+addToCart_Btn.textContent = "✓ Added";
 
-  setTimeout(() => {
-    modal.classList.add("modal-hidden");
+setTimeout(() => {
 
-    addToCart_Btn.textContent = "Add To Cart";
+  addToCart_Btn.disabled = false;
+  addToCart_Btn.textContent = "Add To Cart";
 
-    addToCart_Btn.disabled = false;
-
-  }, 1500);
+}, 2000);
 
 };
 
