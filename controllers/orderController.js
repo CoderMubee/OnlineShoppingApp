@@ -1,45 +1,50 @@
 const db = require("../connection");
 const orderModel = require("../models/orderModel");
-
+const productModel = require("../models/productModel");
+const cartModel = require("../models/cartModel");
 
 // CHECKOUT (CREATE ORDER)
 function checkout(req, res) {
+
   const { user_id } = req.body;
 
   // STEP 1: GET CART ITEMS
-  const cartSql = `
-    SELECT 
-      cart.product_id,
-      cart.quantity,
-      products.price
-    FROM cart
-    JOIN products ON cart.product_id = products.id
-    WHERE cart.user_id = ?
-  `;
+  cartModel.getCartByUser(user_id, (err, cartItems) => {
 
-  db.query(cartSql, [user_id], (err, cartItems) => {
-    if (err) return res.status(500).json({ message: "DB error" });
+    if (err) {
+      return res.status(500).json({ message: "DB error" });
+    }
 
-    if (cartItems.length === 0) {
+    if (!cartItems || cartItems.length === 0) {
       return res.status(400).json({ message: "Cart is empty" });
     }
 
-    // STEP 2: CALCULATE TOTAL
+    // STEP 2: VALIDATE STOCK
+    for (let item of cartItems) {
+      if (item.quantity > item.stock) {
+        return res.status(400).json({
+          message: `Insufficient stock for ${item.name}`
+        });
+      }
+    }
+
+    // STEP 3: CALCULATE TOTAL
     let total = 0;
 
     cartItems.forEach(item => {
-      total += item.price * item.quantity;
+      total += Number(item.price) * Number(item.quantity);
     });
 
-    // STEP 3: CREATE ORDER
+    // STEP 4: CREATE ORDER
     orderModel.createOrder(user_id, total, (err, result) => {
+
       if (err) {
         return res.status(500).json({ message: "Order failed" });
       }
 
       const orderId = result.insertId;
 
-      // STEP 4: PREPARE ORDER ITEMS
+      // STEP 5: CREATE ORDER ITEMS
       const values = cartItems.map(item => [
         orderId,
         item.product_id,
@@ -47,24 +52,57 @@ function checkout(req, res) {
         item.price
       ]);
 
-      // STEP 5: INSERT ORDER ITEMS
       orderModel.createOrderItems(values, (err2) => {
+
         if (err2) {
           return res.status(500).json({ message: "Order items failed" });
         }
 
-        // STEP 6: CLEAR CART
-        const clearSql = `
-          DELETE FROM cart WHERE user_id = ?
-        `;
+        // STEP 6: REDUCE STOCK SAFELY
+        let completed = 0;
 
-        db.query(clearSql, [user_id], (err3) => {
-          if (err3) {
-            return res.status(500).json({ message: "Cart clear failed" });
-          }
+        for (let item of cartItems) {
 
-          res.json({ message: "Checkout successful" });
-        });
+          productModel.reduceStock(
+            item.product_id,
+            item.quantity,
+            (err3, result) => {
+
+              if (err3) {
+                return res.status(500).json({
+                  message: "Stock update failed"
+                });
+              }
+
+              // IMPORTANT SAFETY CHECK
+              if (result.affectedRows === 0) {
+                return res.status(400).json({
+                  message: `Out of stock: ${item.name}`
+                });
+              }
+
+              completed++;
+
+              // STEP 7: WHEN ALL DONE → CLEAR CART
+              if (completed === cartItems.length) {
+
+                cartModel.clearCart(user_id, (err4) => {
+
+                  if (err4) {
+                    return res.status(500).json({
+                      message: "Cart clear failed"
+                    });
+                  }
+
+                  return res.json({
+                    message: "Checkout successful"
+                  });
+
+                });
+              }
+            }
+          );
+        }
       });
     });
   });
@@ -106,5 +144,5 @@ module.exports = {
   checkout,
   getOrders,
   getOrderDetails
-  
+
 };

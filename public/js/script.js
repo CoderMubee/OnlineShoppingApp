@@ -1,4 +1,5 @@
 // Global Variables
+let activeProduct = null;
 const productsGrid = document.querySelector(".products__grid");
 const loginIcon = document.querySelector(".user-login");
 const userStatus = document.querySelector(".user-status");
@@ -67,45 +68,50 @@ function displayProducts(products) {
 // OPEN MODAL
 
 function openProductModal(product) {
+  activeProduct = product;
   const user = getUser();
   const addToCart_Btn = modal.querySelector(".add-cart-btn");
-  const addMore_Btn = modal.querySelector(".view-more-btn");
+
   modal.querySelector(".modal-image").src = product.image_url;
   modal.querySelector(".modal-name").textContent = product.name;
   modal.querySelector(".modal-price").textContent =
     "₦" + Number(product.price).toLocaleString();
-  addToCart_Btn.textContent = 'add to cart';
+
   modal.classList.remove("modal-hidden");
 
-  addToCart_Btn.onclick = async () => {
-
-  if (!user) {
-    window.location.href = "/html/login.html";
-    return;
+  // ===== OUT OF STOCK CHECK =====
+  if (product.stock <= 0) {
+    addToCart_Btn.disabled = true;
+    addToCart_Btn.textContent = "Out of Stock";
+    return; // stop here
   }
 
-  await addToCart(product);
-
- showToast(
-  "Product added to cart",
-  "success"
-);
-
-addToCart_Btn.disabled = true;
-addToCart_Btn.textContent = "✓ Added";
-
-setTimeout(() => {
-
+  // reset button state (important when reopening modal)
   addToCart_Btn.disabled = false;
   addToCart_Btn.textContent = "Add To Cart";
 
-}, 2000);
+  addToCart_Btn.onclick = async () => {
 
-};
+    if (!user) {
+      window.location.href = "/html/login.html";
+      return;
+    }
 
+    await addToCart(product);
+
+    showToast("Product added to cart", "success");
+
+    addToCart_Btn.disabled = true;
+    addToCart_Btn.textContent = "✓ Added";
+
+    setTimeout(() => {
+      addToCart_Btn.disabled = false;
+      addToCart_Btn.textContent = "Add To Cart";
+    }, 2000);
+  };
 
   modal.querySelector(".view-more-btn").onclick = () => {
-    window.location.href = `/product/${product.id}`;
+    window.location.href = `/product/${activeProduct.id}`;
   };
 }
 // CLOSE MODAL
@@ -182,7 +188,7 @@ async function addToCart(product) {
 //get user cart quantity
 async function updateCartCount() {
   const user = getUser();
-  console.log('hi');
+  
   if (!user) return;
 
   const res = await fetch(`/cart/count/${user.id}`);

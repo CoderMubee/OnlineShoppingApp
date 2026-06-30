@@ -99,7 +99,7 @@ function getCartCount(req, res) {
       return res.status(500).json({ message: "DB error" });
     }
 
-    res.json({ total: result[0].total || 0 });
+    res.json({ total: result[0] || 0 });
   });
 }
 

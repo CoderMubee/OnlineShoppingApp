@@ -1,8 +1,8 @@
 const db = require("../connection");
 
-
 // CREATE ORDER
 function createOrder(userId, totalAmount, callback) {
+
   const sql = `
     INSERT INTO orders (user_id, total_amount)
     VALUES (?, ?)
@@ -11,9 +11,9 @@ function createOrder(userId, totalAmount, callback) {
   db.query(sql, [userId, totalAmount], callback);
 }
 
-
-// INSERT ORDER ITEMS (BULK)
+// CREATE ORDER ITEMS
 function createOrderItems(values, callback) {
+
   const sql = `
     INSERT INTO order_items
     (order_id, product_id, quantity, price)
@@ -23,9 +23,9 @@ function createOrderItems(values, callback) {
   db.query(sql, [values], callback);
 }
 
-
-// GET USER ORDERS
+// GET ORDERS
 function getOrdersByUser(userId, callback) {
+
   const sql = `
     SELECT * FROM orders
     WHERE user_id = ?
@@ -35,7 +35,7 @@ function getOrdersByUser(userId, callback) {
   db.query(sql, [userId], callback);
 }
 
-// GET FULL ORDER DETAILS
+// GET ORDER DETAILS
 function getOrderDetails(userId, callback) {
 
   const sql = `
@@ -44,23 +44,14 @@ function getOrderDetails(userId, callback) {
       orders.total_amount,
       orders.status,
       orders.created_at,
-
       products.name,
       products.image_url,
-
       order_items.quantity,
       order_items.price
-
     FROM orders
-
-    JOIN order_items
-      ON orders.id = order_items.order_id
-
-    JOIN products
-      ON order_items.product_id = products.id
-
+    JOIN order_items ON orders.id = order_items.order_id
+    JOIN products ON order_items.product_id = products.id
     WHERE orders.user_id = ?
-
     ORDER BY orders.created_at DESC
   `;
 

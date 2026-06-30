@@ -3,8 +3,9 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Account - UmmuMujahid Store</title>
-    <link rel="stylesheet" href="../css/login&register.css">
+    <link rel="stylesheet" href="../css/register.css">
 
 </head>
 
@@ -13,24 +14,24 @@
 
         <nav class="register__nav account__nav">
             <a href="../index.html" class="register_nav__anchor account_nav__anchor"><img src="../icons/home-30.png"
-                    alt="home icon" class="regiter_nav__img account_nav__img"></a>
+                    alt="home icon" class="register_nav__img account_nav__img"></a>
         </nav>
         <h2 class="register__title">Create Account</h2>
         <p class="register__p--message"></p>
         <form class="register__form">
             <!-- Compulsory -->
-            <input type="text" class="register__input" placeholder="Full Name" required>
-            <input type="email" class="register__input" placeholder="Email Address" required>
-            <input type="password" class="register__input" placeholder="Password" required>
-            <input type="password" class="register__input" placeholder="Confirm Password" required>
+            <input type="text" class="input register__input" placeholder="Full Name" required>
+            <input type="email" class="input register__input" placeholder="Email Address" required>
+            <input type="password" class="input register__input" placeholder="Password" required>
+            <input type="password" class="input register__input" placeholder="Confirm Password" required>
 
             <!-- Optional -->
-            <input type="tel" class="register__input" placeholder="Phone Number (Optional)">
-            <input type="text" class="register__input" placeholder="Address (Optional)">
+            <input type="tel" class="input register__input" placeholder="Phone Number (Optional)">
+            <input type="text" class="input register__input" placeholder="Address (Optional)">
 
             <!-- Compulsory -->
-            <input type="text" class="register__input" placeholder="State" required>
-            <input type="text" class="register__input" placeholder="Country" required>
+            <input type="text" class="input register__input" placeholder="State" required>
+            <input type="text" class="input register__input" placeholder="Country" required>
 
             <!-- Optional -->
             <select class="register__select">
@@ -40,13 +41,13 @@
             </select>
 
             <label>
-                <input type="checkbox"> Subscribe to Newsletter (Optional)
+                <input type="input checkbox"> Subscribe to Newsletter (Optional)
             </label>
 
             <button type="submit" class="register__button">Register</button>
         </form>
         <div class="register__links">
-            <p>Already have an account? <a href="login.html">Login</a></p>
+            <p>Already have an account? <a href="/login">Login</a></p>
         </div>
     </div>
     <script type="module" src="../js/register.js"></script>

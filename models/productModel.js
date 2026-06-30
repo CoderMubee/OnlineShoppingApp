@@ -81,6 +81,18 @@ function deleteProduct(id, callback) {
   db.query(sql, [id], callback);
 }
 
+// Handle Stock Reduction
+function reduceStock(productId, quantity, callback) {
+
+  const sql = `
+    UPDATE products
+    SET stock = stock - ?
+    WHERE id = ? AND stock >= ?
+  `;
+
+  db.query(sql, [quantity, productId, quantity], callback);
+}
+
 
 module.exports = {
   getAllProducts,
@@ -88,5 +100,6 @@ module.exports = {
   getProductById,
   addProduct,
   updateProduct,
-  deleteProduct
+  deleteProduct,
+  reduceStock
 };

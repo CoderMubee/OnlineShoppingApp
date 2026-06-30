@@ -39,26 +39,45 @@ addCartBtn.addEventListener("click", addToCart);
 // ======= (FUNCTION) Logic to Render Products =========
 function renderProduct(product) {
 
-    document.querySelector(".product-image").src =
-        product.image_url;
+  document.querySelector(".product-image").src =
+    product.image_url;
 
-    document.querySelector(".product-name").textContent =
-        product.name;
+  document.querySelector(".product-name").textContent =
+    product.name;
 
-    document.querySelector(".product-price").textContent =
-        `₦${Number(product.price).toLocaleString()}`;
+  document.querySelector(".product-price").textContent =
+    `₦${Number(product.price).toLocaleString()}`;
 
-    document.querySelector(".product-category").textContent =
-        `Category: ${product.category}`;
+  document.querySelector(".product-category").textContent =
+    `Category: ${product.category}`;
 
+  document.querySelector(".product-stock").textContent =
+    `Stock: ${product.stock}`;
+
+  document.querySelector(".product-description").textContent =
+    product.description;
+
+
+  // ===== OUT OF STOCK LOGIC =====
+  if (product.stock <= 0) {
+
+    // show out of stock text
     document.querySelector(".product-stock").textContent =
-        `Stock: ${product.stock}`;
+      "Out of Stock";
 
-    document.querySelector(".product-description").textContent =
-        product.description;
+    document.querySelector(".product-stock").style.color = "red";
 
+    // disable button
+    addCartBtn.disabled = true;
+    addCartBtn.textContent = "Out of Stock";
+
+  } else {
+
+    addCartBtn.disabled = false;
+    addCartBtn.textContent = "Add to Cart";
+
+  }
 }
-
 //======= (FUNCTION) Add Items to Cart =======
 async function addToCart() {
 
